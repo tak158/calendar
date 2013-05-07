@@ -1,39 +1,7 @@
-<% if false %>
-<table>
-  <thead>
-    <tr>
-      <th>Todo</th>
-      <th>Due</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @todos.each do |todo| %>
-      <tr>
-        <td><%= todo.todo %></td>
-        <td><%= todo.due %></td>
-        <td><%= link_to 'Show', todo %></td>
-        <td><%= link_to 'Edit', edit_todo_path(todo) %></td>
-        <td><%= link_to 'Destroy', todo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= button_to "test", class: 'btn' %>
-<%= button_to "New", :action => "new", class: "btn" %>
-
-<%= link_to 'New Todo', new_todo_path %>
-
-<button class="btn btn-large btn-primary" type="button">Large button</button>
-
-<% end %>
-
+<%= @day_of_week %>
+<%= @point_of_day[@day_of_week] %>
+<%= @end_of_month %>
+<%= @todos[0].id %>
 
 <br>
 
@@ -50,13 +18,15 @@
   <tbody>
     <% 5.times do |i| %>
     <tr>
-      <td><div class="day_element"><a href="#myModal" class="hoehoe" data-toggle="modal">div</a></div></td>
-      <td><div class="day_element">div</div></td>
-      <td><div class="day_element">div</div></td>
-      <td><div class="day_element">div</div></td>
-      <td><div class="day_element">div</div></td>
-      <td><div class="day_element">div</div></td>
-      <td><div class="day_element">div</div></td>
+      <% 7.times do |j| %>
+      <td>
+        <% if @count_of_block>=@point_of_day[@day_of_week] && @end_of_month.to_i>=@count_of_day.to_i %>
+        <div class="day_element" id="<%= "day_#{@count_of_day}" %>"><%= link_to @count_of_day, "#myModal", remote: true, class: "hoehoe", "data-toggle" => "modal" %></div>
+        <% @count_of_day+=1 %>
+        <% end %>
+      </td>
+      <% @count_of_block+=1 %>
+      <% end %>
     </tr>
     <% end %>
   </tbody>
@@ -65,15 +35,24 @@
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">× </button>
-    <h3 id="myModalLabel">Modal header</h3>
+    <h3 id="myModalLabel">Todo</h3>
   </div>
   <div class="modal-body">
-    <p>One fine body…</p>
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary">Save changes</button>
+    <button class="btn btn-primary">OK</button>
   </div>
 </div>
 
-<a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+<%= javascript_tag do %>
+$(".hoehoe").on("click", function(){
+  $.get("<%= new_todo_path  %>", {name: "John"}, function(data){
+    $(".modal-body").html(data);
+  });
+});
+
+for(i=1; i<=@todos.length; i++){
+  ;
+}
+<% end %>

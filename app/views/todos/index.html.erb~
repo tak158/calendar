@@ -50,14 +50,33 @@
   <tbody>
     <% 5.times do |i| %>
     <tr>
-      <td><div class="day_element">div</div></td>
-      <td><div class="day_element">div</div></td>
-      <td><div class="day_element">div</div></td>
-      <td><div class="day_element">div</div></td>
-      <td><div class="day_element">div</div></td>
-      <td><div class="day_element">div</div></td>
-      <td><div class="day_element">div</div></td>
+      <% 7.times do |j| %>
+      <td><div class="day_element"><%= link_to "div", "#myModal", remote: true, class: "hoehoe", "data-toggle" => "modal" %></div></td>
+      <% end %>
     </tr>
     <% end %>
   </tbody>
 </table>
+
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">× </button>
+    <h3 id="myModalLabel">Todo</h3>
+  </div>
+  <div class="modal-body">
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary">OK</button>
+  </div>
+</div>
+
+<a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+
+<%= javascript_tag do %>
+$(".hoehoe").on("click", function(){
+  $.get("<%= new_todo_path  %>", {name: "John"}, function(data){
+    $(".modal-body").html(data);
+  });
+});
+<% end %>
