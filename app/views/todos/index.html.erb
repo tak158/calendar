@@ -1,0 +1,63 @@
+<% if false %>
+<table>
+  <thead>
+    <tr>
+      <th>Todo</th>
+      <th>Due</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @todos.each do |todo| %>
+      <tr>
+        <td><%= todo.todo %></td>
+        <td><%= todo.due %></td>
+        <td><%= link_to 'Show', todo %></td>
+        <td><%= link_to 'Edit', edit_todo_path(todo) %></td>
+        <td><%= link_to 'Destroy', todo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= button_to "test", class: 'btn' %>
+<%= button_to "New", :action => "new", class: "btn" %>
+
+<%= link_to 'New Todo', new_todo_path %>
+
+<button class="btn btn-large btn-primary" type="button">Large button</button>
+
+<% end %>
+
+
+<br>
+
+<table class="table" border="3">
+  <thead>
+    <th>SUN</th>
+    <th>MON</th>
+    <th>TUE</th>
+    <th>WED</th>
+    <th>THU</th>
+    <th>FRI</th>
+    <th>SAT</th>
+  </thead>
+  <tbody>
+    <% 5.times do |i| %>
+    <tr>
+      <td><div class="day_element">div</div></td>
+      <td><div class="day_element">div</div></td>
+      <td><div class="day_element">div</div></td>
+      <td><div class="day_element">div</div></td>
+      <td><div class="day_element">div</div></td>
+      <td><div class="day_element">div</div></td>
+      <td><div class="day_element">div</div></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
