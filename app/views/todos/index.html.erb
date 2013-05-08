@@ -57,7 +57,22 @@ $(".hoehoe").on("click", function(){
   });
 });
 
-$(".day_task").draggable();
+$(".day_task").draggable({
+  stop: function(ev, ui){
+    var table_offset = $("table tbody").offset();
+    var out_obj = [table_offset.top, table_offset.left+$("table tbody").width(), table_offset.top+$("table tbody").height(), table_offset.left];
+    console.log(out_obj);
+    var task_offset = $(this).offset();
+    var in_obj = [task_offset.top, task_offset.left+$(this).width(), task_offset.top+$(this).height(), task_offset.left];
+    console.log(in_obj);
+
+    if( is_in_range(out_obj, in_obj)){
+      ;
+    }else{
+      $(this).remove();
+    }
+  }
+});
 
 
 $(".day_element").droppable({
@@ -72,6 +87,20 @@ $(".day_element").droppable({
   }
 });
 
-
-
+// in_objがout_objの中に含まれているかを判定する関数
+// objは両方とも配列とする
+// obj[0]から上、右、下、左とする
+var is_in_range = function(out_obj, in_obj){
+  if(out_obj[0] > in_obj[0]){
+    return false;
+  }else if(out_obj[1] < in_obj[1]){
+    return false;
+  }else if(out_obj[2] < in_obj[2]){
+    return false;
+  }else if(out_obj[3] > in_obj[3]){
+    return false;                        
+  }else{
+    return true;
+  }
+};
 <% end %>
