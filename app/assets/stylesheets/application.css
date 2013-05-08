@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require_tree .
+ *= require jquery.ui.all
  */
  
  
@@ -2024,11 +2025,13 @@ table {
 
 .table th,
 .table td {
-  padding: 8px;
+  padding: 2px;
   line-height: 20px;
   text-align: left;
   vertical-align: top;
   border-top: 1px solid #dddddd;
+  width: 80px;
+  height: 80px;
 }
 
 .table th {

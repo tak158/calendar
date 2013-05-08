@@ -11,7 +11,6 @@ class TodosController < ApplicationController
     @count_of_block = 0
     @count_of_day = 1
     @end_of_month = Time.now.end_of_month.strftime("%d")
-
   end
 
   # GET /todos/1

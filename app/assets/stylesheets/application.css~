@@ -2010,7 +2010,7 @@ legend + .control-group {
 }
 
 table {
-  max-width: 90%;
+  max-width: 70%;
   background-color: transparent;
   border-collapse: collapse;
   border-spacing: 0;
@@ -2018,7 +2018,7 @@ table {
 }
 
 .table {
-  width: 90%;
+  width: 70%;
   margin-bottom: 20px;
 }
 

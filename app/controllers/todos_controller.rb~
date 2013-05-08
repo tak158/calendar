@@ -7,7 +7,11 @@ class TodosController < ApplicationController
     @todos = Todo.all
     # decide start day of week
     @day_of_week = Time.now.beginning_of_month.strftime("%a")
-    debugger
+    @point_of_day = {"Sun"=>0, "Mon"=>1, "Tue"=> 2, "Wed"=>3, "THU"=>4, "FRI"=>5, "SAT"=>6};
+    @count_of_block = 0
+    @count_of_day = 1
+    @end_of_month = Time.now.end_of_month.strftime("%d")
+
   end
 
   # GET /todos/1

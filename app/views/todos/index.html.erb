@@ -1,7 +1,6 @@
 <%= @day_of_week %>
 <%= @point_of_day[@day_of_week] %>
 <%= @end_of_month %>
-<%= @todos[0].id %>
 
 <br>
 
@@ -19,9 +18,15 @@
     <% 5.times do |i| %>
     <tr>
       <% 7.times do |j| %>
-      <td>
+      <td class="day_element" id="<%= "day_#{@count_of_day}" %>">
         <% if @count_of_block>=@point_of_day[@day_of_week] && @end_of_month.to_i>=@count_of_day.to_i %>
-        <div class="day_element" id="<%= "day_#{@count_of_day}" %>"><%= link_to @count_of_day, "#myModal", remote: true, class: "hoehoe", "data-toggle" => "modal" %></div>
+        <%= link_to @count_of_day, "#myModal", remote: true, class: "hoehoe", "data-toggle" => "modal" %>
+          <% @todos.each do |todo| %>
+          <% if todo.due.strftime("%d").to_i == @count_of_day %>
+             <div class="day_task"><%= todo.todo %></div>
+          <% end %>
+          <% end %>
+        </div>
         <% @count_of_day+=1 %>
         <% end %>
       </td>
@@ -52,7 +57,21 @@ $(".hoehoe").on("click", function(){
   });
 });
 
-for(i=1; i<=@todos.length; i++){
-  ;
-}
+$(".day_task").draggable();
+
+
+$(".day_element").droppable({
+  tolerance: "fit",
+  drop: function(ev, ui){
+    console.log(ev);
+    console.log(ui);
+    console.log(this);
+    $("div.day_task.ui-draggable").css({left: 0, top: 0});
+    console.log(this);
+    ui.draggable.appendTo(this);
+  }
+});
+
+
+
 <% end %>
